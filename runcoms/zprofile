@@ -17,11 +17,15 @@ fi
 # Editors
 #
 
-if [[ -z "$EDITOR" ]]; then
-  export EDITOR='nano'
+if [[ -z "$EDITOR" ]] && (( $+commands[nvim] )); then
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
 fi
-if [[ -z "$VISUAL" ]]; then
-  export VISUAL='nano'
+if [[ -z "$VISUAL" ]] && (( $+commands[nvim] )); then
+  export VISUAL='nvim'
+else
+  export VISUAL='vim'
 fi
 if [[ -z "$PAGER" ]]; then
   export PAGER='less'
@@ -53,6 +57,7 @@ path=(
   /opt/{homebrew,local}/{,s}bin(N)
   /usr/local/{,s}bin(N)
   $path
+  $HOME/.cargo/bin(N)
 )
 
 #
